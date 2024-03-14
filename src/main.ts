@@ -31,10 +31,8 @@
  *
  */
 
-
 import './style.css'
-
-console.log("hello wasdlkjasdkla")
+import { Obstacle } from './components/obstacle'
 
 const canvas = document.querySelector("canvas")
 if (!canvas) throw new Error("canvas not found")
@@ -43,7 +41,19 @@ canvas.height = window.innerHeight
 
 const c = canvas.getContext("2d")
 if (!c) throw new Error("Canvas context not found")
+
+const obstacles: Obstacle[] = []
+
+for (let i = 0; i < 4; i++) {
+  obstacles.push(new Obstacle(c, innerWidth + i * 400, Math.random() * innerWidth / 2, -1, i*200))
+}
+
 const animate = () => {
+  c.clearRect(0, 0, innerWidth, innerHeight)
+  for (let i = 0; i < obstacles.length; i++) {
+    obstacles[i].update()
+  }
+  requestAnimationFrame(animate)
 }
 
 animate()
