@@ -10,13 +10,13 @@
  * Data:
  *   - x pos
  * Behaviours:
- *   - Create
+ *   - Create / draw
  *   - Destroy
+ *   - Change / update
  *   - Pause/play?
  *
  */
 
 export class Obstacle {
-  
 
 }
