@@ -26,6 +26,7 @@
  * File structure:
  * main.ts - contains main game loop
  * setup.ts - initialises game objects
+ * components/ - folder contains object definitions
  * utils.ts - utility functions
  *
  */
@@ -33,5 +34,16 @@
 
 import './style.css'
 
+console.log("hello wasdlkjasdkla")
 
+const canvas = document.querySelector("canvas")
+if (!canvas) throw new Error("canvas not found")
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
 
+const c = canvas.getContext("2d")
+if (!c) throw new Error("Canvas context not found")
+const animate = () => {
+}
+
+animate()
