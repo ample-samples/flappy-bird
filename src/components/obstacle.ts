@@ -28,6 +28,7 @@ export class Obstacle {
   width = 100;
   height = innerHeight;
   xOffset: number; // distance from first object
+
   constructor(c: CanvasRenderingContext2D, x: number, y: number, dx: number, xOffset: number) {
     this.x = x;
     this.y = y;
@@ -44,13 +45,13 @@ export class Obstacle {
 
   update = () => {
     if (this.x < 0 - this.width) {
-      this.x += innerWidth + this.width;
+      this.reset()
     }
     this.x += this.dx;
     this.draw();
   }
 
   reset = () => {
-
+    this.x += innerWidth + this.width;
   }
 }

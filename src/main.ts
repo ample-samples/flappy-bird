@@ -45,7 +45,7 @@ if (!c) throw new Error("Canvas context not found")
 const obstacles: Obstacle[] = []
 
 for (let i = 0; i < 4; i++) {
-  obstacles.push(new Obstacle(c, innerWidth + i * 400, Math.random() * innerWidth / 2, -1, i*200))
+  obstacles.push(new Obstacle(c, innerWidth + i * 400, (innerHeight * (1 + Math.random())) / 2, -1, i*200))
 }
 
 const animate = () => {
