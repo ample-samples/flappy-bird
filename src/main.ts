@@ -33,6 +33,8 @@
 
 import './style.css'
 import { Obstacle } from './components/obstacle'
+import { Bird } from './components/bird'
+import { birdHitsObstacle } from './utils'
 
 const canvas = document.querySelector("canvas")
 if (!canvas) throw new Error("canvas not found")
@@ -44,15 +46,27 @@ if (!c) throw new Error("Canvas context not found")
 
 const obstacles: Obstacle[] = []
 
-for (let i = 0; i < 4; i++) {
-  obstacles.push(new Obstacle(c, innerWidth + i * 400, (innerHeight * (1 + Math.random())) / 2, -1, i*200))
+const numObstacles = Math.floor(innerWidth / 300)
+
+for (let i = 0; i <= numObstacles; i++) {
+  obstacles.push(new Obstacle(c, innerWidth, -1, 300 * (i+1) + innerWidth))
 }
+
+console.log(obstacles.length)
+
+const bird = new Bird(c)
 
 const animate = () => {
   c.clearRect(0, 0, innerWidth, innerHeight)
   for (let i = 0; i < obstacles.length; i++) {
     obstacles[i].update()
   }
+  bird.update()
+  obstacles.forEach(Obstacle => {
+    if (birdHitsObstacle(bird, Obstacle)) {
+      console.log("hit")
+    }
+  })
   requestAnimationFrame(animate)
 }
 
