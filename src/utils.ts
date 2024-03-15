@@ -1,6 +1,7 @@
 import { Obstacle } from './components/obstacle'
+import { Bird } from './components/bird'
 
-export const birdHitsObstacle = (bird: any, obstacle: Obstacle) => {
+export const birdHitsObstacle = (bird: Bird, obstacle: Obstacle) => {
   const rect1 = {
     x: obstacle.x,
     y: obstacle.y,
