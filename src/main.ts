@@ -35,6 +35,7 @@ import './style.css'
 import { Obstacle } from './components/obstacle'
 import { Bird } from './components/bird'
 import { birdHitsObstacle } from './utils'
+import { GameOver } from './components/gameOver'
 
 export type State = {
   score: number,
@@ -63,12 +64,14 @@ for (let i = 0; i <= numObstacles; i++) {
 }
 
 const bird = new Bird(c)
+const gameOver = new GameOver(c)
 
 const animate = () => {
   c.clearRect(0, 0, innerWidth, innerHeight)
   for (let i = 0; i < obstacles.length; i++) {
     obstacles[i].update()
   }
+  gameOver.update()
   bird.update()
   obstacles.forEach(obstacle => {
     if (birdHitsObstacle(bird, obstacle)) {
@@ -83,6 +86,7 @@ const animate = () => {
       obstacle.stop()
     })
     bird.stop()
+    gameOver.show()
   }
   requestAnimationFrame(animate)
 }
