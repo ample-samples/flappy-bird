@@ -21,10 +21,10 @@ export const birdHitsObstacle = (bird: Bird, obstacle: Obstacle) => {
   const distY2 = Math.abs(bird.y - rect2.y - rect2.h / 2);
 
   if ((distX1 > (rect1.w / 2 + bird.r)) 
-    || (distX2 > (rect2.w / 2 + bird.r))) { return false }
+    && (distX2 > (rect2.w / 2 + bird.r))) { return false }
 
   if ((distY1 > (rect1.h / 2 + bird.r)) 
-    || (distY2 > (rect2.h / 2 + bird.r))) { return false }
+    && (distY2 > (rect2.h / 2 + bird.r))) { return false }
 
   if (distX1 <= (rect1.w / 2)) { return true }
   if (distY1 <= (rect1.h / 2)) { return true }

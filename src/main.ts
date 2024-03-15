@@ -36,6 +36,16 @@ import { Obstacle } from './components/obstacle'
 import { Bird } from './components/bird'
 import { birdHitsObstacle } from './utils'
 
+export type State = {
+  score: number,
+  gameOver: boolean
+}
+
+let state: State = {
+  score: 0,
+  gameOver: false
+}
+
 const canvas = document.querySelector("canvas")
 if (!canvas) throw new Error("canvas not found")
 canvas.width = window.innerWidth
@@ -49,12 +59,10 @@ const obstacles: Obstacle[] = []
 const numObstacles = Math.floor(innerWidth / 300)
 
 for (let i = 0; i <= numObstacles; i++) {
-  obstacles.push(new Obstacle(c, innerWidth, -1, 300 * (i+1) + innerWidth))
+  obstacles.push(new Obstacle(c, innerWidth, -1, 300 * (i+1) + innerWidth, state))
 }
 
-console.log(obstacles.length)
-
-const bird = new Bird(c)
+const bird = new Bird(c, state)
 
 const animate = () => {
   c.clearRect(0, 0, innerWidth, innerHeight)
@@ -62,11 +70,20 @@ const animate = () => {
     obstacles[i].update()
   }
   bird.update()
-  obstacles.forEach(Obstacle => {
-    if (birdHitsObstacle(bird, Obstacle)) {
-      console.log("hit")
+  obstacles.forEach(obstacle => {
+    if (birdHitsObstacle(bird, obstacle)) {
+      state = { ...state, gameOver: true }
     }
   })
+  if (bird.hasFallenOff) {
+      state = { ...state, gameOver: true }
+  }
+  if (state.gameOver) {
+    obstacles.forEach(obstacle => {
+      obstacle.stop()
+    })
+    bird.stop()
+  }
   requestAnimationFrame(animate)
 }
 

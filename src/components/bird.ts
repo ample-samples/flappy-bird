@@ -1,3 +1,5 @@
+import { State } from "../main";
+
 export class Bird {
   x: number; // starting x pos
   y: number; // starting y pos
@@ -6,18 +8,21 @@ export class Bird {
   width = 100;
   r = 30;
   grav = 0.02
+  state: State
+  hasFallenOff: boolean
   jumpEvent = (event: KeyboardEvent) => {
     if (event.code === "ArrowUp") {
       this.dy = -2
     }
   }
 
-  constructor(c: CanvasRenderingContext2D) {
+  constructor(c: CanvasRenderingContext2D, state: State) {
     this.x = 100;
     this.y = innerHeight / 2 - 200;
     this.c = c;
     this.dy = 0;
-    this.canJump = true
+    this.state = state
+    this.hasFallenOff = false
 
     this.c.canvas.addEventListener("keydown", this.jumpEvent)
   }
@@ -30,12 +35,15 @@ export class Bird {
   }
 
   update = () => {
+    if (this.state.gameOver) {
+      this.stop()
+      return
+    }
     this.dy += this.grav
     this.y += this.dy
     if (this.y > innerHeight - this.r) {
-      this.grav = 0
-      this.dy = 0
-      console.log("fell off")
+      this.hasFallenOff = true
+      this.stop()
     }
     this.draw()
   }

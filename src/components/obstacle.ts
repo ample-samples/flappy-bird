@@ -22,6 +22,7 @@
  * obst dist = floor(innerWidth / 4)?
  *
  */
+import { State } from "../main";
 
 export class Obstacle {
   x: number; // starting x pos
@@ -30,13 +31,15 @@ export class Obstacle {
   c: CanvasRenderingContext2D;
   width = 100;
   height = innerHeight;
+  state: State
 
-  constructor(c: CanvasRenderingContext2D, x: number, dx: number, xOffset: number) {
+  constructor(c: CanvasRenderingContext2D, x: number, dx: number, xOffset: number, state: State) {
     this.x = x + xOffset;
     // max 3/4 ih, min 1/4 ih
     this.y = (innerHeight * (1 + Math.random())) / 2 - innerHeight / 4
     this.dx = dx;
     this.c = c;
+    this.state = state
   }
 
   draw = () => {
@@ -57,5 +60,13 @@ export class Obstacle {
   reset = () => {
     this.x = innerWidth + this.width;
     this.y = (innerHeight * (1 + Math.random())) / 2 - innerHeight / 4
+  }
+
+  restart = () => {
+    this.draw()
+  }
+
+  stop = () => {
+    this.dx = 0
   }
 }
