@@ -18,6 +18,9 @@
  *   - Change / update
  *   - Pause/play?
  *
+ * There should be 3-4 obstacles on the screen at once
+ * obst dist = floor(innerWidth / 4)?
+ *
  */
 
 export class Obstacle {
@@ -27,20 +30,20 @@ export class Obstacle {
   c: CanvasRenderingContext2D;
   width = 100;
   height = innerHeight;
-  xOffset: number; // distance from first object
 
-  constructor(c: CanvasRenderingContext2D, x: number, y: number, dx: number, xOffset: number) {
-    this.x = x;
-    this.y = y;
+  constructor(c: CanvasRenderingContext2D, x: number, dx: number, xOffset: number) {
+    this.x = x + xOffset;
+    // max 3/4 ih, min 1/4 ih
+    this.y = (innerHeight * (1 + Math.random())) / 2 - innerHeight / 4
     this.dx = dx;
     this.c = c;
-    this.xOffset = xOffset;
   }
 
   draw = () => {
     this.c.beginPath()
+    this.c.fillStyle = "#aaa"
     this.c.fillRect(this.x, this.y, this.width, this.height)
-    this.c.fillRect(this.x, this.y - (innerHeight + 100), this.width, this.height)
+    this.c.fillRect(this.x, this.y - (innerHeight + 200), this.width, this.height)
   }
 
   update = () => {
@@ -52,6 +55,7 @@ export class Obstacle {
   }
 
   reset = () => {
-    this.x += innerWidth + this.width;
+    this.x = innerWidth + this.width;
+    this.y = (innerHeight * (1 + Math.random())) / 2 - innerHeight / 4
   }
 }
