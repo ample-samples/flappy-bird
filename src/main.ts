@@ -59,10 +59,10 @@ const obstacles: Obstacle[] = []
 const numObstacles = Math.floor(innerWidth / 300)
 
 for (let i = 0; i <= numObstacles; i++) {
-  obstacles.push(new Obstacle(c, innerWidth, -1, 300 * (i+1) + innerWidth, state))
+  obstacles.push(new Obstacle(c, innerWidth, -1, 300 * (i+1) + innerWidth))
 }
 
-const bird = new Bird(c, state)
+const bird = new Bird(c)
 
 const animate = () => {
   c.clearRect(0, 0, innerWidth, innerHeight)
