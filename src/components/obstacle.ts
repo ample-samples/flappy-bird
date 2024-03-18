@@ -31,13 +31,17 @@ export class Obstacle {
   c: CanvasRenderingContext2D;
   width = 100;
   height = innerHeight;
+  xOffset: number;
+  initialdx: number;
 
-  constructor(c: CanvasRenderingContext2D, x: number, dx: number, xOffset: number) {
-    this.x = x + xOffset;
+  constructor(c: CanvasRenderingContext2D, dx: number, xOffset: number) {
+    this.x = innerWidth + xOffset;
     // max 3/4 ih, min 1/4 ih
     this.y = (innerHeight * (1 + Math.random())) / 2 - innerHeight / 4
     this.dx = dx;
     this.c = c;
+    this.xOffset = xOffset
+    this.initialdx = dx
   }
 
   draw = () => {
@@ -58,6 +62,9 @@ export class Obstacle {
   }
 
   restart = () => {
+    this.dx = this.initialdx
+    this.x = innerWidth + this.xOffset
+    this.y = (innerHeight * (1 + Math.random())) / 2 - innerHeight / 4
     this.draw()
   }
 

@@ -45,6 +45,7 @@ export class Bird {
   restart = () => {
     this.grav = 0.02
     this.y = innerHeight / 2
+    this.hasFallenOff = false
     this.draw()
     this.c.canvas.addEventListener("keydown", this.jumpEvent)
   }

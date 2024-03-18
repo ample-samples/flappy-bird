@@ -8,6 +8,8 @@ export class GameOver {
     this.c = c;
   }
 
+  restart = () => {};
+
   show = (score: number) => {
     this.c.beginPath()
     this.c.fillStyle = "#333333aa"

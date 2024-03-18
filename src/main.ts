@@ -62,16 +62,32 @@ const obstacles: Obstacle[] = []
 const numObstacles = Math.floor(innerWidth / 300)
 
 for (let i = 0; i <= numObstacles; i++) {
-  obstacles.push(new Obstacle(c, innerWidth, -1, 300 * (i+1) + innerWidth))
+  obstacles.push(new Obstacle(c, -1, 300 * (i+1) + innerWidth))
 }
 
 const bird = new Bird(c)
 const gameOver = new GameOver(c)
 
-window.addEventListener()
+window.addEventListener("keydown", (event: KeyboardEvent) => {
+    if (event.code === "KeyR") {
+      state = { ...state, restart: true }
+    }
+})
 
 const animate = () => {
   c.clearRect(0, 0, innerWidth, innerHeight)
+  if (state.restart) {
+    console.log({state})
+    state = { ...state, gameOver: false, score: 0 }
+    console.log("restarting")
+    gameOver.isVisisble = false
+    bird.restart()
+    obstacles.forEach(obstacle => {
+      obstacle.restart()
+      })
+    state = { ...state, restart: false }
+    console.log({state})
+  }
   for (let i = 0; i < obstacles.length; i++) {
     obstacles[i].update()
   }
@@ -82,10 +98,12 @@ const animate = () => {
       state.score++
     }
     if (birdHitsObstacle(bird, obstacle)) {
+      console.log("birdHitsObstacle")
       state = { ...state, gameOver: true }
     }
   })
   if (bird.hasFallenOff) {
+    console.log("Bird fell off")
       state = { ...state, gameOver: true }
   }
   if (state.gameOver) {
