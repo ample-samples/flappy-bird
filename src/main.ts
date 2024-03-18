@@ -71,7 +71,6 @@ const animate = () => {
   for (let i = 0; i < obstacles.length; i++) {
     obstacles[i].update()
   }
-  gameOver.update()
   bird.update()
   obstacles.forEach(obstacle => {
     if (birdHitsObstacle(bird, obstacle)) {
