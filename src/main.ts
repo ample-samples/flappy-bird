@@ -94,13 +94,16 @@ const animate = () => {
     if (obstacle.x < 0 - obstacle.width) {
       obstacle.reset()
       state.score++
+      // TODO: if score is mult of 10 and not zero, play epic sound
     }
     if (birdHitsObstacle(bird, obstacle)) {
+      // TODO: if gameOver is false, play game over sound
       state = { ...state, gameOver: true }
     }
   })
 
   if (bird.hasFallenOff) {
+      // TODO: if gameOver is false, play game over sound
       state = { ...state, gameOver: true }
   }
   if (state.gameOver) {
