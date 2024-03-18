@@ -78,6 +78,8 @@ const gameOverSound = document.querySelector<HTMLAudioElement>(".audio__game-ove
 if (!gameOverSound) throw new Error("Gameover element not found")
 const epicSound = document.querySelector<HTMLAudioElement>(".audio__epic")
 if (!epicSound) throw new Error("Epic element not found")
+const pointSound = document.querySelector<HTMLAudioElement>(".audio__point")
+if (!pointSound) throw new Error("Point element not found")
 
 const animate = () => {
   c.clearRect(0, 0, innerWidth, innerHeight)
@@ -99,6 +101,7 @@ const animate = () => {
     if (obstacle.x < 0 - obstacle.width) {
       obstacle.reset()
       state.score++
+      pointSound.play()
       if (state.score !== 0 && state.score % 10 === 0) {
         epicSound.play()
       }
