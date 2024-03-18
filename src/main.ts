@@ -77,16 +77,13 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
 const animate = () => {
   c.clearRect(0, 0, innerWidth, innerHeight)
   if (state.restart) {
-    console.log({state})
     state = { ...state, gameOver: false, score: 0 }
-    console.log("restarting")
     gameOver.isVisisble = false
     bird.restart()
     obstacles.forEach(obstacle => {
       obstacle.restart()
       })
     state = { ...state, restart: false }
-    console.log({state})
   }
   for (let i = 0; i < obstacles.length; i++) {
     obstacles[i].update()
@@ -98,12 +95,10 @@ const animate = () => {
       state.score++
     }
     if (birdHitsObstacle(bird, obstacle)) {
-      console.log("birdHitsObstacle")
       state = { ...state, gameOver: true }
     }
   })
   if (bird.hasFallenOff) {
-    console.log("Bird fell off")
       state = { ...state, gameOver: true }
   }
   if (state.gameOver) {
