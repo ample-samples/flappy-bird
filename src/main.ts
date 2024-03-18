@@ -74,6 +74,11 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
     }
 })
 
+const gameOverSound = document.querySelector<HTMLAudioElement>(".audio__game-over")
+if (!gameOverSound) throw new Error("Gameover element not found")
+const epicSound = document.querySelector<HTMLAudioElement>(".audio__epic")
+if (!epicSound) throw new Error("Epic element not found")
+
 const animate = () => {
   c.clearRect(0, 0, innerWidth, innerHeight)
   if (state.restart) {
@@ -94,16 +99,18 @@ const animate = () => {
     if (obstacle.x < 0 - obstacle.width) {
       obstacle.reset()
       state.score++
-      // TODO: if score is mult of 10 and not zero, play epic sound
+      if (state.score !== 0 && state.score % 10 === 0) {
+        epicSound.play()
+      }
     }
     if (birdHitsObstacle(bird, obstacle)) {
-      // TODO: if gameOver is false, play game over sound
+      if (!state.gameOver) gameOverSound.play()
       state = { ...state, gameOver: true }
     }
   })
 
   if (bird.hasFallenOff) {
-      // TODO: if gameOver is false, play game over sound
+      if (!state.gameOver) gameOverSound.play()
       state = { ...state, gameOver: true }
   }
   if (state.gameOver) {

@@ -10,7 +10,9 @@ export class Bird {
   jumpEvent = (event: KeyboardEvent) => {
     if (event.code === "ArrowUp") {
       this.dy = -2
-      // TODO: Play jump sound
+      const jumpSound = document.querySelector<HTMLAudioElement>(".audio__jump")
+      if (!jumpSound) throw new Error("Jump element not found")
+      jumpSound.play()
     }
   }
 
