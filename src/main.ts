@@ -39,12 +39,14 @@ import { GameOver } from './components/gameOver'
 
 export type State = {
   score: number,
-  gameOver: boolean
+  gameOver: boolean,
+  restart: boolean
 }
 
 let state: State = {
   score: 0,
-  gameOver: false
+  gameOver: false,
+  restart: false
 }
 
 const canvas = document.querySelector("canvas")
@@ -65,6 +67,8 @@ for (let i = 0; i <= numObstacles; i++) {
 
 const bird = new Bird(c)
 const gameOver = new GameOver(c)
+
+window.addEventListener()
 
 const animate = () => {
   c.clearRect(0, 0, innerWidth, innerHeight)
@@ -91,6 +95,10 @@ const animate = () => {
     bird.stop()
     gameOver.show(state.score)
   }
+  c.font = "30px Arial";
+  c.fillStyle = "#000"
+  c.textAlign = "left"
+  c.fillText("Score: " + state.score, 0, 30)
   requestAnimationFrame(animate)
 }
 

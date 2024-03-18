@@ -11,7 +11,7 @@ export class GameOver {
   show = (score: number) => {
     this.c.beginPath()
     this.c.fillStyle = "#333333aa"
-    this.c.fillRect(0, 0, innerWidth, innerHeight)
+    this.c.fillRect(innerWidth / 2 - 100, innerHeight / 2 - 50, 200, 150)
     this.c.font = "30px Arial";
 
     this.c.fillStyle = "#000"
@@ -21,5 +21,4 @@ export class GameOver {
     this.c.textAlign = "center"
     this.c.fillText(`Score: ${score}`, innerWidth / 2, innerHeight / 2 + 50);
   }
-  hide = () => {}
 }
