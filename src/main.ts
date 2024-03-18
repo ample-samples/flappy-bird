@@ -35,7 +35,6 @@ import './style.css'
 import { Obstacle } from './components/obstacle'
 import { Bird } from './components/bird'
 import { birdHitsObstacle } from './utils'
-import { GameOver } from './components/gameOver'
 
 export type State = {
   score: number,
@@ -60,18 +59,30 @@ const obstacles: Obstacle[] = []
 const numObstacles = Math.floor(innerWidth / 300)
 
 for (let i = 0; i <= numObstacles; i++) {
-  obstacles.push(new Obstacle(c, innerWidth, -1, 300 * (i+1) + innerWidth))
+  obstacles.push(new Obstacle(c, innerWidth, 300 * (i+1) + innerWidth))
 }
 
 const bird = new Bird(c)
-const gameOver = new GameOver(c)
+const gameOverScreen = document.querySelector<HTMLDivElement>(".game-over")
+if (!gameOverScreen) throw new Error("Game over screen not found")
+const gameOverRestart = document.querySelector<HTMLButtonElement>(".game-over__restart")
+if (!gameOverRestart) throw new Error("Game over restart button not found")
+
+gameOverRestart.addEventListener("click", (event) => {
+  state.gameOver = false
+  obstacles.forEach(obstacle => {
+    obstacle.restart()
+    obstacle.draw()
+  })
+  bird.restart()
+  gameOverScreen.style.display = "none"
+})
 
 const animate = () => {
   c.clearRect(0, 0, innerWidth, innerHeight)
   for (let i = 0; i < obstacles.length; i++) {
     obstacles[i].update()
   }
-  gameOver.update()
   bird.update()
   obstacles.forEach(obstacle => {
     if (birdHitsObstacle(bird, obstacle)) {
@@ -86,7 +97,7 @@ const animate = () => {
       obstacle.stop()
     })
     bird.stop()
-    gameOver.show()
+    gameOverScreen.style.display = "block"
   }
   requestAnimationFrame(animate)
 }

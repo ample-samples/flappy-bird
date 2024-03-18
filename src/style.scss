@@ -5,5 +5,12 @@
 }
 
 canvas {
-	display: block;
+  display: block;
+}
+
+.game-over {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
 }
