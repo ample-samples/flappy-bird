@@ -1,5 +1,3 @@
-import { State } from "../main";
-
 export class Bird {
   x: number; // starting x pos
   y: number; // starting y pos

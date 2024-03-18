@@ -1,29 +1,3 @@
-/*
- * An obstacle is a game object that moves 
- * across the screen and will end the 
- * game if touched
- *
- * It will be created on the right side 
- * of the screen and move to the left
- *
- * Contains data about the object and behaviours
- * Data:
- *   - x pos
- *   - y pos
- *   - dx speed
- *   - dy = 0
- * Behaviours:
- *   - Create / draw
- *   - Reset to start / reset
- *   - Change / update
- *   - Pause/play?
- *
- * There should be 3-4 obstacles on the screen at once
- * obst dist = floor(innerWidth / 4)?
- *
- */
-import { State } from "../main";
-
 export class Obstacle {
   x: number; // starting x pos
   y: number; // starting y pos

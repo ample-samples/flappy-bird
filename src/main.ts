@@ -85,6 +85,7 @@ const animate = () => {
       })
     state = { ...state, restart: false }
   }
+
   for (let i = 0; i < obstacles.length; i++) {
     obstacles[i].update()
   }
@@ -98,6 +99,7 @@ const animate = () => {
       state = { ...state, gameOver: true }
     }
   })
+
   if (bird.hasFallenOff) {
       state = { ...state, gameOver: true }
   }
@@ -108,10 +110,12 @@ const animate = () => {
     bird.stop()
     gameOver.show(state.score)
   }
+
   c.font = "30px Arial";
   c.fillStyle = "#000"
   c.textAlign = "left"
   c.fillText("Score: " + state.score, 0, 30)
+
   requestAnimationFrame(animate)
 }
 

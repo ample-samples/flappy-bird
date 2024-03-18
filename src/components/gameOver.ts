@@ -1,5 +1,3 @@
-import { State } from "../main";
-
 export class GameOver {
   isVisisble: boolean;
   c: CanvasRenderingContext2D;
