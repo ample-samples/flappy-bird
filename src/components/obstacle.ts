@@ -48,9 +48,6 @@ export class Obstacle {
   }
 
   update = () => {
-    if (this.x < 0 - this.width) {
-      this.reset()
-    }
     this.x += this.dx;
     this.draw();
   }

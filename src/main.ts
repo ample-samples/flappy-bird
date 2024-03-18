@@ -73,6 +73,10 @@ const animate = () => {
   }
   bird.update()
   obstacles.forEach(obstacle => {
+    if (obstacle.x < 0 - obstacle.width) {
+      obstacle.reset()
+      state.score++
+    }
     if (birdHitsObstacle(bird, obstacle)) {
       state = { ...state, gameOver: true }
     }
@@ -85,7 +89,7 @@ const animate = () => {
       obstacle.stop()
     })
     bird.stop()
-    gameOver.show()
+    gameOver.show(state.score)
   }
   requestAnimationFrame(animate)
 }
