@@ -7,22 +7,24 @@ export class Obstacle {
   height = innerHeight;
   xOffset: number;
   initialdx: number;
+  pipeImg: CanvasImageSource;
 
-  constructor(c: CanvasRenderingContext2D, dx: number, xOffset: number) {
+  constructor(c: CanvasRenderingContext2D, dx: number, xOffset: number, pipeImg: CanvasImageSource) {
     this.x = innerWidth + xOffset;
     // max 3/4 ih, min 1/4 ih
-    this.y = (innerHeight * (1 + Math.random())) / 2 - innerHeight / 4
+    this.y = (innerHeight * (1 + Math.random())) / 2 - innerHeight / 4 + 100
     this.dx = dx;
     this.c = c;
     this.xOffset = xOffset
     this.initialdx = dx
+    this.pipeImg = pipeImg
   }
 
   draw = () => {
-    this.c.beginPath()
-    this.c.fillStyle = "#aaa"
-    this.c.fillRect(this.x, this.y, this.width, this.height)
-    this.c.fillRect(this.x, this.y - (innerHeight + 200), this.width, this.height)
+      this.c.beginPath()
+      this.c.fillStyle = "#aaa"
+      this.c.drawImage(this.pipeImg, this.x, this.y, this.width, this.height)
+      this.c.drawImage(this.pipeImg, this.x, this.y - (innerHeight + 200), this.width, this.height)
   }
 
   update = () => {
@@ -32,13 +34,13 @@ export class Obstacle {
 
   reset = () => {
     this.x = innerWidth + this.width;
-    this.y = (innerHeight * (1 + Math.random())) / 2 - innerHeight / 4
+    this.y = (innerHeight * (1 + Math.random())) / 2 - innerHeight / 4 + 100
   }
 
   restart = () => {
     this.dx = this.initialdx
     this.x = innerWidth + this.xOffset
-    this.y = (innerHeight * (1 + Math.random())) / 2 - innerHeight / 4
+    this.y = (innerHeight * (1 + Math.random())) / 2 - innerHeight / 4 + 100
     this.draw()
   }
 

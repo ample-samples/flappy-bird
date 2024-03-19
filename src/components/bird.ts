@@ -4,9 +4,10 @@ export class Bird {
   dy: number;
   c: CanvasRenderingContext2D;
   width = 100;
-  r = 30;
+  r = 20;
   grav = 0.02
   hasFallenOff: boolean
+  image: CanvasImageSource
   jumpEvent = (event: KeyboardEvent) => {
     if (event.code === "ArrowUp") {
       this.dy = -2
@@ -16,21 +17,19 @@ export class Bird {
     }
   }
 
-  constructor(c: CanvasRenderingContext2D) {
+  constructor(c: CanvasRenderingContext2D, image: CanvasImageSource) {
     this.x = 100;
     this.y = innerHeight / 2 - 200;
     this.c = c;
     this.dy = 0;
     this.hasFallenOff = false
+    this.image = image
 
     this.c.canvas.addEventListener("keydown", this.jumpEvent)
   }
 
   draw = () => {
-    this.c.beginPath()
-    this.c.strokeStyle = "#aaa"
-    this.c.arc(this.x, this.y, this.r, 0, Math.PI * 2)
-    this.c.stroke()
+    this.c.drawImage(this.image, this.x - this.width/4, this.y -this.width/4, this.width/2, this.width/2)
   }
 
   update = () => {
