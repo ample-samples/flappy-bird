@@ -36,21 +36,19 @@ const c = canvas.getContext("2d")
 if (!c) throw new Error("Canvas context not found")
 
 const obstacles: Obstacle[] = []
-
 const numObstacles = Math.floor(innerWidth / 300)
-
-const bird = new Bird(c, birdImg)
-const gameOver = new GameOver(c)
-const numBackgrounds = Math.ceil(innerWidth / innerHeight) + 1
+for (let i = 0; i <= numObstacles; i++) {
+  obstacles.push(new Obstacle(c, -1, 300 * (i + 1) + innerWidth, pipeImg))
+}
 
 const backgrounds: BackgroundPanel[] = []
+const numBackgrounds = Math.ceil(innerWidth / innerHeight) + 1
 for (let i = 0; i < numBackgrounds; i++) {
   backgrounds.push(new BackgroundPanel(c, -1, backgroundImg, i * innerHeight))
 }
 
-for (let i = 0; i <= numObstacles; i++) {
-  obstacles.push(new Obstacle(c, -1, 300 * (i + 1) + innerWidth, pipeImg))
-}
+const bird = new Bird(c, birdImg)
+const gameOver = new GameOver(c)
 
 window.addEventListener("keydown", (event: KeyboardEvent) => {
   if (event.code === "KeyR") {
