@@ -13,7 +13,7 @@ export class Obstacle {
     this.x = innerWidth + xOffset;
     // max 3/4 ih, min 1/4 ih
     this.y = (innerHeight * (1 + Math.random())) / 2 - innerHeight / 4 + 100
-    this.dx = -20;
+    this.dx = dx;
     this.c = c;
     this.xOffset = xOffset
     this.initialdx = dx
