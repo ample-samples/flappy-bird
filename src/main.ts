@@ -157,7 +157,7 @@ const animate = () => {
   }
 
   c.font = "30px Arial";
-  c.fillStyle = "#000"
+  c.fillStyle = "#94FDFF"
   c.textAlign = "left"
   c.fillText("Score: " + state.score, 0, 30)
 

@@ -10,17 +10,16 @@ export class GameOver {
 
   show = (score: number) => {
     this.c.beginPath()
-    this.c.fillStyle = "#333333aa"
-    this.c.fillRect(innerWidth / 2 - 100, innerHeight / 2 - 50, 200, 200)
+    this.c.fillStyle = "#0069AAaa"
+    this.c.fillRect(innerWidth / 2 - 100, innerHeight / 2 - 50, 200, 180)
     this.c.font = "30px Arial";
 
-    this.c.fillStyle = "#000"
+    this.c.fillStyle = "#00396D"
+    this.c.fillStyle = "#FFEB57"
     this.c.textAlign = "center"
     this.c.fillText("Game Over", innerWidth / 2, innerHeight / 2);
-    this.c.fillStyle = "#000"
     this.c.textAlign = "center"
     this.c.fillText(`Score: ${score}`, innerWidth / 2, innerHeight / 2 + 50);
-    this.c.fillText("Press r to", innerWidth / 2, innerHeight / 2 + 100);
-    this.c.fillText("restart", innerWidth / 2, innerHeight / 2 + 130);
+    this.c.fillText("R To Restart", innerWidth / 2, innerHeight / 2 + 100);
   }
 }
