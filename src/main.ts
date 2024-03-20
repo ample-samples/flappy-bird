@@ -34,10 +34,11 @@
 import './style.css'
 import { Obstacle } from './components/obstacle'
 import { Bird } from './components/bird'
-import { birdHitsObstacle } from './utils'
 import { GameOver } from './components/gameOver'
+import { BackgroundPanel } from './components/background'
+import { birdHitsObstacle } from './utils'
 import pipeComplete_base64 from './assets/images/PipeComplete_base64'
-import bird_base64 from './assets/images/Bird_base64'
+import bird_base64 from './assets/images/bigBird_base64'
 import background_base64 from './assets/images/Background4_base64'
 
 const pipeImg = new Image()
@@ -73,6 +74,18 @@ const numObstacles = Math.floor(innerWidth / 300)
 
 const bird = new Bird(c, birdImg)
 const gameOver = new GameOver(c)
+const numBackgrounds = Math.ceil(innerHeight / innerWidth) + 1
+
+const backgrounds: BackgroundPanel[] = []
+for (let i = 0; i <= numBackgrounds; i++) {
+  backgrounds.push(new BackgroundPanel(c, -1, backgroundImg, i * innerHeight))
+}
+
+const background = new BackgroundPanel(c, -1, backgroundImg, 0)
+
+for (let i = 0; i <= numObstacles; i++) {
+  obstacles.push(new Obstacle(c, -1, 300 * (i+1) + innerWidth, pipeImg))
+}
 
 window.addEventListener("keydown", (event: KeyboardEvent) => {
     if (event.code === "KeyR") {
@@ -89,6 +102,9 @@ if (!pointSound) throw new Error("Point element not found")
 
 const animate = () => {
   c.clearRect(0, 0, innerWidth, innerHeight)
+  backgrounds.forEach(background => {
+    background.draw()
+    })
   if (state.restart) {
     state = { ...state, gameOver: false, score: 0 }
     gameOver.isVisisble = false
@@ -138,9 +154,6 @@ const animate = () => {
   requestAnimationFrame(animate)
 }
 
-for (let i = 0; i <= numObstacles; i++) {
-  obstacles.push(new Obstacle(c, -1, 300 * (i+1) + innerWidth, pipeImg))
-}
 pipeImg.onload = () => {
   requestAnimationFrame(animate)
 }
