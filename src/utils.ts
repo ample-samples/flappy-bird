@@ -16,8 +16,8 @@ export const birdHitsObstacle = (bird: Bird, obstacle: Obstacle) => {
   }
 
   const distX1 = Math.abs(bird.x - rect1.x - rect1.w / 2);
-  const distY1 = Math.abs(bird.y - rect1.y - rect1.h / 2);
   const distX2 = Math.abs(bird.x - rect2.x - rect2.w / 2);
+  const distY1 = Math.abs(bird.y - rect1.y - rect1.h / 2);
   const distY2 = Math.abs(bird.y - rect2.y - rect2.h / 2);
 
   if ((distX1 > (rect1.w / 2 + bird.r)) 
