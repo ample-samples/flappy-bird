@@ -86,15 +86,11 @@ const animate = () => {
     state = { ...state, restart: false }
   }
 
-  backgrounds.forEach(background => {
-    background.draw()
-  })
-
-  for (let i = 0; i < obstacles.length; i++) {
-    obstacles[i].update()
-  }
+  backgrounds.forEach(background => background.draw())
 
   bird.update()
+  obstacles.forEach(obstacle => obstacle.update())
+
   obstacles.forEach(obstacle => {
     if (obstacle.x < 0 - obstacle.width) {
       obstacle.reset()
