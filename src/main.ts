@@ -91,7 +91,13 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
     }
 })
 
-window.addEventListener("click", (event: MouseEvent) => {
+window.addEventListener("keydown", (event: KeyboardEvent) => {
+  if (event.code === "ArrowUp" && state.gameOver) {
+    state = { ...state, restart: true }
+  }
+  })
+
+window.addEventListener("click", () => {
   if (state.gameOver) {
     state = { ...state, restart: true }
   }
