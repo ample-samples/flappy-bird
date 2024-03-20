@@ -74,10 +74,10 @@ const numObstacles = Math.floor(innerWidth / 300)
 
 const bird = new Bird(c, birdImg)
 const gameOver = new GameOver(c)
-const numBackgrounds = Math.ceil(innerHeight / innerWidth) + 1
+const numBackgrounds = Math.ceil(innerWidth / innerHeight) + 1
 
 const backgrounds: BackgroundPanel[] = []
-for (let i = 0; i <= numBackgrounds; i++) {
+for (let i = 0; i < numBackgrounds; i++) {
   backgrounds.push(new BackgroundPanel(c, -1, backgroundImg, i * innerHeight))
 }
 
