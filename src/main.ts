@@ -81,8 +81,6 @@ for (let i = 0; i < numBackgrounds; i++) {
   backgrounds.push(new BackgroundPanel(c, -1, backgroundImg, i * innerHeight))
 }
 
-const background = new BackgroundPanel(c, -1, backgroundImg, 0)
-
 for (let i = 0; i <= numObstacles; i++) {
   obstacles.push(new Obstacle(c, -1, 300 * (i+1) + innerWidth, pipeImg))
 }
@@ -92,6 +90,12 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
       state = { ...state, restart: true }
     }
 })
+
+window.addEventListener("click", (event: MouseEvent) => {
+  if (state.gameOver) {
+    state = { ...state, restart: true }
+  }
+  })
 
 const gameOverSound = document.querySelector<HTMLAudioElement>(".audio__game-over")
 if (!gameOverSound) throw new Error("Gameover element not found")

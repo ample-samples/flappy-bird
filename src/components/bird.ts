@@ -8,8 +8,9 @@ export class Bird {
   grav = 0.02
   hasFallenOff: boolean
   image: CanvasImageSource
-  jumpEvent = (event: KeyboardEvent) => {
-    if (event.code === "ArrowUp") {
+  jumpEvent = (event: KeyboardEvent | MouseEvent) => {
+    if (event instanceof KeyboardEvent && event.code === "ArrowUp"
+    || event instanceof MouseEvent) {
       this.dy = -2
       const jumpSound = document.querySelector<HTMLAudioElement>(".audio__jump")
       if (!jumpSound) throw new Error("Jump element not found")
@@ -26,6 +27,7 @@ export class Bird {
     this.image = image
 
     this.c.canvas.addEventListener("keydown", this.jumpEvent)
+    this.c.canvas.addEventListener("click", this.jumpEvent)
   }
 
   draw = () => {
@@ -49,11 +51,13 @@ export class Bird {
     this.dy = 0
     this.draw()
     this.c.canvas.addEventListener("keydown", this.jumpEvent)
+    this.c.canvas.addEventListener("click", this.jumpEvent)
   }
 
   stop = () => {
     this.dy = 0
     this.grav = 0
     this.c.canvas.removeEventListener("keydown", this.jumpEvent)
+    this.c.canvas.removeEventListener("click", this.jumpEvent)
   }
 }
