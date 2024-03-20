@@ -77,22 +77,23 @@ if (!pointSound) throw new Error("Point element not found")
 
 const animate = () => {
   c.clearRect(0, 0, innerWidth, innerHeight)
-  backgrounds.forEach(background => {
-    background.draw()
-  })
+
   if (state.restart) {
     state = { ...state, gameOver: false, score: 0 }
     gameOver.isVisisble = false
     bird.restart()
-    obstacles.forEach(obstacle => {
-      obstacle.restart()
-    })
+    obstacles.forEach(obstacle => obstacle.restart())
     state = { ...state, restart: false }
   }
+
+  backgrounds.forEach(background => {
+    background.draw()
+  })
 
   for (let i = 0; i < obstacles.length; i++) {
     obstacles[i].update()
   }
+
   bird.update()
   obstacles.forEach(obstacle => {
     if (obstacle.x < 0 - obstacle.width) {
@@ -113,10 +114,9 @@ const animate = () => {
     if (!state.gameOver) gameOverSound.play()
     state = { ...state, gameOver: true }
   }
+
   if (state.gameOver) {
-    obstacles.forEach(obstacle => {
-      obstacle.stop()
-    })
+    obstacles.forEach(obstacle => obstacle.stop())
     bird.stop()
     gameOver.show(state.score)
   }
@@ -129,6 +129,4 @@ const animate = () => {
   requestAnimationFrame(animate)
 }
 
-pipeImg.onload = () => {
-  requestAnimationFrame(animate)
-}
+requestAnimationFrame(animate)
