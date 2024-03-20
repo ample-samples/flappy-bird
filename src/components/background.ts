@@ -1,5 +1,5 @@
 export class BackgroundPanel {
-  c:CanvasRenderingContext2D
+  c: CanvasRenderingContext2D
   image: CanvasImageSource
   dx: number
   initialdx: number
@@ -20,6 +20,6 @@ export class BackgroundPanel {
   update = () => {
 
   }
-  restart = () => {}
-  stop = () => {}
+  restart = () => { }
+  stop = () => { }
 }

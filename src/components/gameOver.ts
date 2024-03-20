@@ -1,12 +1,12 @@
 export class GameOver {
   isVisisble: boolean;
   c: CanvasRenderingContext2D;
-  constructor (c: CanvasRenderingContext2D) {
+  constructor(c: CanvasRenderingContext2D) {
     this.isVisisble = false;
     this.c = c;
   }
 
-  restart = () => {};
+  restart = () => { };
 
   show = (score: number) => {
     this.c.beginPath()

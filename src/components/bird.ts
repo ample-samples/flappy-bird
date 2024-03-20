@@ -10,7 +10,7 @@ export class Bird {
   image: CanvasImageSource
   jumpEvent = (event: KeyboardEvent | MouseEvent) => {
     if (event instanceof KeyboardEvent && event.code === "ArrowUp"
-    || event instanceof MouseEvent) {
+      || event instanceof MouseEvent) {
       this.dy = -2
       const jumpSound = document.querySelector<HTMLAudioElement>(".audio__jump")
       if (!jumpSound) throw new Error("Jump element not found")
@@ -31,7 +31,7 @@ export class Bird {
   }
 
   draw = () => {
-    this.c.drawImage(this.image, this.x - this.width/4, this.y -this.width/4, this.width/2, this.width/2)
+    this.c.drawImage(this.image, this.x - this.width / 4, this.y - this.width / 4, this.width / 2, this.width / 2)
   }
 
   update = () => {

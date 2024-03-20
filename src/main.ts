@@ -82,26 +82,26 @@ for (let i = 0; i < numBackgrounds; i++) {
 }
 
 for (let i = 0; i <= numObstacles; i++) {
-  obstacles.push(new Obstacle(c, -1, 300 * (i+1) + innerWidth, pipeImg))
+  obstacles.push(new Obstacle(c, -1, 300 * (i + 1) + innerWidth, pipeImg))
 }
 
 window.addEventListener("keydown", (event: KeyboardEvent) => {
-    if (event.code === "KeyR") {
-      state = { ...state, restart: true }
-    }
+  if (event.code === "KeyR") {
+    state = { ...state, restart: true }
+  }
 })
 
 window.addEventListener("keydown", (event: KeyboardEvent) => {
   if (event.code === "ArrowUp" && state.gameOver) {
     state = { ...state, restart: true }
   }
-  })
+})
 
 window.addEventListener("click", () => {
   if (state.gameOver) {
     state = { ...state, restart: true }
   }
-  })
+})
 
 const gameOverSound = document.querySelector<HTMLAudioElement>(".audio__game-over")
 if (!gameOverSound) throw new Error("Gameover element not found")
@@ -114,14 +114,14 @@ const animate = () => {
   c.clearRect(0, 0, innerWidth, innerHeight)
   backgrounds.forEach(background => {
     background.draw()
-    })
+  })
   if (state.restart) {
     state = { ...state, gameOver: false, score: 0 }
     gameOver.isVisisble = false
     bird.restart()
     obstacles.forEach(obstacle => {
       obstacle.restart()
-      })
+    })
     state = { ...state, restart: false }
   }
 
@@ -145,8 +145,8 @@ const animate = () => {
   })
 
   if (bird.hasFallenOff) {
-      if (!state.gameOver) gameOverSound.play()
-      state = { ...state, gameOver: true }
+    if (!state.gameOver) gameOverSound.play()
+    state = { ...state, gameOver: true }
   }
   if (state.gameOver) {
     obstacles.forEach(obstacle => {

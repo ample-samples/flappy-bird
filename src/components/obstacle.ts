@@ -21,10 +21,10 @@ export class Obstacle {
   }
 
   draw = () => {
-      this.c.beginPath()
-      this.c.fillStyle = "#aaa"
-      this.c.drawImage(this.pipeImg, this.x, this.y, this.width, this.height)
-      this.c.drawImage(this.pipeImg, this.x, this.y - (innerHeight + 200), this.width, this.height)
+    this.c.beginPath()
+    this.c.fillStyle = "#aaa"
+    this.c.drawImage(this.pipeImg, this.x, this.y, this.width, this.height)
+    this.c.drawImage(this.pipeImg, this.x, this.y - (innerHeight + 200), this.width, this.height)
   }
 
   update = () => {
